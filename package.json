@@ -2,19 +2,25 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "create a pokedex",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "eslint src/**"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Johannafendrich/pokedex.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Johanna",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Johannafendrich/pokedex/issues"
   },
-  "homepage": "https://github.com/Johannafendrich/pokedex#readme"
+  "homepage": "https://github.com/Johannafendrich/pokedex#readme",
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
 }
