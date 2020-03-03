@@ -1,5 +1,19 @@
-$body-color: green;
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
 
 body {
-  color: $body-color;
+  margin: 0;
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(177, 204, 214),
+    rgb(125, 178, 184),
+    rgb(90, 139, 145)
+  );
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  font-size: 80px;
 }
