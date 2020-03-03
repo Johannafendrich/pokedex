@@ -1,6 +1,6 @@
 @use "../theme";
 
-.pokemons {
+.pokemonList {
   margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -8,12 +8,11 @@
 }
 
 .pokemon {
-  font-size: 0.8rem;
   text-transform: uppercase;
   text-align: center;
-  margin: 4px;
+  margin: 5px;
   border: 1px solid theme.$text-color;
-  padding: 4px;
+  padding: 5px;
   border-radius: 0.25rem;
-  background: rgb(240, 238, 142);
+  background-color: #fcfbf8;
 }
