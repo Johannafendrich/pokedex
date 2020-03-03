@@ -27,7 +27,13 @@ module.exports = {
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
-          'sass-loader'
+          {
+            loader: 'sass-loder',
+            options: {
+              //Prefer `dartsass`
+              implementation: require('sass')
+            }
+          }
         ]
       }
     ]
