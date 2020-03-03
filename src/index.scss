@@ -1,3 +1,4 @@
+@use "./theme";
 @import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
 
 *,
@@ -8,13 +9,13 @@
 
 body {
   margin: 0;
-  background-image: linear-gradient(
-    to right,
-    rgb(246, 197, 199),
-    rgb(201, 222, 250),
-    rgb(195, 234, 248),
-    rgb(211, 248, 199)
+  background-image: radial-gradient(
+    circle,
+    theme.$primary-color,
+    theme.$tertiary-color,
+    theme.$secondary-color
   );
   height: 100vh;
   font-family: 'Odibee Sans', cursive;
+  font-size: 18px;
 }
