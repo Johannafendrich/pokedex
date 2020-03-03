@@ -1,9 +1,9 @@
 import './pokemons.scss';
 import { createElement } from '../lib/dom';
 
-export function pokemons(items) {
+export function pokemonList(items) {
   const container = createElement('div', {
-    className: 'pokemons'
+    className: 'pokemonList'
   });
 
   items.forEach(item => {
