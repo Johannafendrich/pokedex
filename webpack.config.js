@@ -28,7 +28,7 @@ module.exports = {
           'css-loader',
           // Compiles Sass to CSS
           {
-            loader: 'sass-loder',
+            loader: 'sass-loader',
             options: {
               //Prefer `dartsass`
               implementation: require('sass')

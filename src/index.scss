@@ -1,5 +1,16 @@
-$body-color: green;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
 
 body {
-  color: $body-color;
+  margin: 0;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(137, 176, 191, 1),
+    rgba(104, 159, 165, 1),
+    rgb(69, 115, 121)
+  );
+  height: 100vh;
 }
