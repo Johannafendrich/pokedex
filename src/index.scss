@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@use "./theme";
+@import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
+
 *,
 *::after,
 *::before {
@@ -7,12 +9,13 @@
 
 body {
   margin: 0;
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(177, 204, 214),
-    rgb(125, 178, 184),
-    rgb(90, 139, 145)
+  background-image: radial-gradient(
+    circle,
+    theme.$primary-color,
+    theme.$tertiary-color,
+    theme.$secondary-color
   );
   height: 100vh;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Odibee Sans', cursive;
+  font-size: 18px;
 }

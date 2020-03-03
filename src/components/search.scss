@@ -1,7 +1,14 @@
+@use "../theme";
 .search {
-  background-color: none;
-  border-bottom: 1px solid rgba($color: #414040, $alpha: 1);
-  text-align: center;
+  border: none;
   width: 140px;
   height: 20px;
+  padding-left: 5px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+
+  &::placeholder {
+    color: lighten(theme.$text-color, 40%);
+  }
 }
