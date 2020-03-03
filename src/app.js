@@ -10,11 +10,19 @@ export function app() {
   const main = createElement('main', {
     className: 'main'
   });
-  const titleElement = title('Pokedex 2k20');
+  const titleElement = title('Pokedex');
   const searchElement = search();
 
   header.appendChild(titleElement);
   main.appendChild(searchElement);
 
+  const searchText = createElement('div', {
+    className: 'searchText'
+  });
+  main.appendChild(searchText);
+
+  searchElement.addEventListener('input', event => {
+    console.log(event.target.value);
+  });
   return [header, main];
 }
