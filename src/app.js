@@ -15,7 +15,7 @@ export function app() {
     className: 'main'
   });
   const titleElement = title('Pokedex');
-  const searchElement = search();
+  const searchElement = search(sessionStorage.getItem('searchValue'));
   const logo = createElement('img', {
     className: 'logo',
     src: Logo
@@ -32,12 +32,16 @@ export function app() {
     searchResults.innerHTML = ''; // clear search results
 
     const searchValue = event.target.value;
+    const LowerCaseSearchValue = searchValue.toLowerCase();
+
     const filteredPokemons = allPokemons.filter(pokemon => {
-      return pokemon.toLowerCase().startsWith(searchValue.toLowerCase());
+      return pokemon.toLowerCase().startsWith(LowerCaseSearchValue);
     });
 
     const pokemonsElement = pokemonList(filteredPokemons);
     searchResults.appendChild(pokemonsElement);
+
+    sessionStorage.setItem('searchValue', searchValue);
   });
 
   return [header, main];
