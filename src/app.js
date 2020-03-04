@@ -1,11 +1,20 @@
 import './app.scss';
 import { createElement } from './lib/dom';
 import { title } from './components/title';
-import { search } from './components/search';
+import { createSearchInput } from './components/search';
 import { pokemonList } from './components/pokemons';
 import Logo from './assets/PokeBall-black.svg';
 
 const allPokemons = ['Pikachu', 'Pixi', 'Glumanda', 'Bibor'];
+
+function filterPokemons(searchValue) {
+  const lowerCaseSearchValue = searchValue.toLowerCase();
+
+  const filteredPokemons = allPokemons.filter(pokemon => {
+    return pokemon.toLowerCase().startsWith(lowerCaseSearchValue);
+  });
+  return filteredPokemons;
+}
 
 export function app() {
   const header = createElement('header', {
@@ -15,23 +24,38 @@ export function app() {
     className: 'main'
   });
   const titleElement = title('Pokedex');
+
+  const searchElement = createSearchInput(
+    sessionStorage.getItem('searchValue')
+  );
+
   const searchElement = search(sessionStorage.getItem('searchValue'));
+
   const logo = createElement('img', {
     className: 'logo',
     src: Logo
   });
+  const searchResults = createElement('div', {});
+
+  let pokemons = null;
+  function setSearchResults() {
+    const filteredPokemons = filterPokemons(searchElement.value);
+    pokemons = pokemonList(filteredPokemons);
+    searchResults.appendChild(pokemons);
+  }
+  setSearchResults();
 
   header.appendChild(titleElement);
   header.appendChild(logo);
   main.appendChild(searchElement);
-
-  const searchResults = createElement('div', {});
   main.appendChild(searchResults);
 
   searchElement.addEventListener('input', event => {
-    searchResults.innerHTML = ''; // clear search results
+    searchResults.removeChild(pokemons);
+    setSearchResults();
 
     const searchValue = event.target.value;
+
     const LowerCaseSearchValue = searchValue.toLowerCase();
 
     const filteredPokemons = allPokemons.filter(pokemon => {
@@ -40,6 +64,7 @@ export function app() {
 
     const pokemonsElement = pokemonList(filteredPokemons);
     searchResults.appendChild(pokemonsElement);
+
 
     sessionStorage.setItem('searchValue', searchValue);
   });
