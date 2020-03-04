@@ -33,7 +33,7 @@ export function app() {
 
     const searchValue = event.target.value;
     const filteredPokemons = allPokemons.filter(pokemon => {
-      return pokemon.startsWith(searchValue);
+      return pokemon.toLowerCase().startsWith(searchValue.toLowerCase());
     });
 
     const pokemonsElement = pokemonList(filteredPokemons);
