@@ -23,7 +23,7 @@ export function app() {
   const main = createElement('main', {
     className: 'main'
   });
-  const titleElement = createElement('Pokedex', {
+  const titleElement = title('Pokedex', {
     className: 'title'
   });
 
