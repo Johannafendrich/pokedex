@@ -3,6 +3,8 @@ import { createElement } from './lib/dom';
 import { title } from './components/title';
 import { createSearchInput } from './components/search';
 import { pokemonList } from './components/pokemons';
+import { createfavList } from './components/favList';
+
 import Logo from './assets/PokeBall-black.svg';
 
 const allPokemons = ['Pikachu', 'Pixi', 'Glumanda', 'Bibor'];
@@ -35,6 +37,10 @@ export function app() {
   });
   const searchResults = createElement('div', {});
 
+  const favList = createfavList({
+    items: ['Pikachu', 'Glumandu', 'Pixi']
+  });
+
   let pokemons = null;
   function setSearchResults() {
     const filteredPokemons = filterPokemons(searchElement.value);
@@ -47,6 +53,7 @@ export function app() {
   header.appendChild(logo);
   main.appendChild(searchElement);
   main.appendChild(searchResults);
+  main.appendChild(favList);
 
   searchElement.addEventListener('input', event => {
     searchResults.removeChild(pokemons);

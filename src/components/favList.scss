@@ -1,0 +1,23 @@
+@use "../theme";
+
+.favList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  width: 90%;
+  height: 150px;
+  margin: 50px 10px;
+  border: theme.$text-color 1px solid;
+  border-radius: 0.3rem;
+  background-color: theme.$background-color;
+}
+
+.myFavorites {
+  width: 80px;
+  height: 100px;
+  justify-content: center;
+  background-color: lighten(theme.$tertiary-color, 5%);
+}
