@@ -15,4 +15,11 @@
   padding: 5px;
   border-radius: 0.3rem;
   background-color: #fafafa;
+  &:hover {
+    background: theme.$secondary-color;
+  }
+
+  &:active {
+    background: theme.$primary-color;
+  }
 }
