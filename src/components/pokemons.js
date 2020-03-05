@@ -13,7 +13,8 @@ export function pokemonList(items) {
     });
     element.addEventListener('click', () => {
       const favorites = [item];
-      localStorage.setItem('favorites', JSON.stringify(favorites));
+      const favoritesJSON = JSON.stringify(favorites);
+      localStorage.setItem('favorites', favoritesJSON);
     });
     container.appendChild(element);
   });

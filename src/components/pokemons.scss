@@ -15,7 +15,11 @@
   padding: 5px;
   border-radius: 0.3rem;
   background-color: #fafafa;
+  &:hover {
+    background: theme.$secondary-color;
+  }
+
   &:active {
-    background: rgb(240, 119, 20);
+    background: theme.$primary-color;
   }
 }
