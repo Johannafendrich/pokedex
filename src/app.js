@@ -23,7 +23,9 @@ export function app() {
   const main = createElement('main', {
     className: 'main'
   });
-  const titleElement = title('Pokedex');
+  const titleElement = createElement('Pokedex', {
+    className: 'title'
+  });
 
   const searchElement = createSearchInput(
     sessionStorage.getItem('searchValue')
