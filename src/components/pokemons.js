@@ -2,7 +2,7 @@ import './pokemons.scss';
 import { createElement, appendContent } from '../lib/dom';
 export function createSearchResults(props) {
   const container = createElement('div', {
-    className: 'pokemons'
+    className: 'pokemonList'
   });
   props.items.forEach(item => {
     const element = createElement('div', {
