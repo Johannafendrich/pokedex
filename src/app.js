@@ -1,21 +1,29 @@
 import './app.scss';
-import { createElement } from './lib/dom';
+import { createElement, appendContent } from './lib/dom';
 import { title } from './components/title';
 import { createSearchInput } from './components/search';
-import { pokemonList } from './components/pokemons';
-import { createfavList } from './components/favList';
-
+import { createSearchResults } from './components/pokemons';
+import { filterPokemons } from './lib/pokemon';
+import { createFavList } from './components/favList';
 import Logo from './assets/PokeBall-black.svg';
 
-const allPokemons = ['Pikachu', 'Pixi', 'Glumanda', 'Bibor'];
+function refreshLocalStorage(item) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-function filterPokemons(searchValue) {
-  const lowerCaseSearchValue = searchValue.toLowerCase();
+  if (!favorites.includes(item)) {
+    favorites.push(item);
+  } else {
+    const itemIndex = favorites.indexOf(item);
+    favorites.splice(itemIndex, 1);
+  }
 
-  const filteredPokemons = allPokemons.filter(pokemon => {
-    return pokemon.toLowerCase().startsWith(lowerCaseSearchValue);
-  });
-  return filteredPokemons;
+  if (favorites.length > 3) {
+    // favorites.splice(0, 1);
+    favorites = favorites.slice(1);
+  }
+
+  const favoritesJSON = JSON.stringify(favorites);
+  localStorage.setItem('favorites', favoritesJSON);
 }
 
 export function app() {
@@ -26,42 +34,51 @@ export function app() {
     className: 'main'
   });
   const titleElement = title('Pokedex');
-
-  const searchElement = createSearchInput(
-    sessionStorage.getItem('searchValue')
-  );
+  const searchElement = createSearchInput({
+    value: sessionStorage.getItem('searchValue')
+  });
 
   const logo = createElement('img', {
     className: 'logo',
     src: Logo
   });
-  const searchResults = createElement('div', {});
 
-  const favList = createfavList({
-    items: ['Pikachu', 'Glumandu', 'Pixi']
+  const favoritesContainer = createElement('div');
+  let favorites = createFavList({
+    items: JSON.parse(localStorage.getItem('favorites')) || []
   });
+  appendContent(favoritesContainer, favorites);
 
+  function handleSearchResultClick(item) {
+    refreshLocalStorage(item);
+    favoritesContainer.removeChild(favorites);
+    favorites = createFavList({
+      items: JSON.parse(localStorage.getItem('favorites')) || []
+    });
+    appendContent(favoritesContainer, favorites);
+  }
   let pokemons = null;
   function setSearchResults() {
     const filteredPokemons = filterPokemons(searchElement.value);
-    pokemons = pokemonList(filteredPokemons);
-    searchResults.appendChild(pokemons);
+    pokemons = createSearchResults({
+      items: filteredPokemons,
+      onSearchResultClick: handleSearchResultClick
+    });
+    appendContent(main, pokemons);
   }
+
   setSearchResults();
 
-  header.appendChild(titleElement);
-  header.appendChild(logo);
-  main.appendChild(searchElement);
-  main.appendChild(searchResults);
-  main.appendChild(favList);
+  appendContent(header, [titleElement, logo]);
+  appendContent(main, [searchElement, pokemons]);
 
   searchElement.addEventListener('input', event => {
-    searchResults.removeChild(pokemons);
+    main.removeChild(pokemons);
     setSearchResults();
 
     const searchValue = event.target.value;
     sessionStorage.setItem('searchValue', searchValue);
   });
 
-  return [header, main];
+  return [header, main, favoritesContainer];
 }

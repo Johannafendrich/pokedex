@@ -1,16 +1,17 @@
 import './favList.scss';
-import { createElement } from '../lib/dom';
+import { createElement, appendContent } from '../lib/dom';
 
-export function createfavList(props) {
-  const container = createElement('div', {
+export function createFavList(props) {
+  const container = createElement('section', {
     className: 'favList'
   });
+
   props.items.forEach(item => {
-    const favorit = createElement('div', {
-      innerText: item,
-      className: 'myFavorites'
+    const favorite = createElement('div', {
+      className: 'MyFavorites',
+      innerText: item
     });
-    container.appendChild(favorit);
+    appendContent(container, favorite);
   });
   return container;
 }
