@@ -1,23 +1,18 @@
 import './pokemons.scss';
-import { createElement } from '../lib/dom';
-
-export function pokemonList(items) {
+import { createElement, appendContent } from '../lib/dom';
+export function createSearchResults(props) {
   const container = createElement('div', {
-    className: 'pokemonList'
+    className: 'pokemons'
   });
-
-  items.forEach(item => {
+  props.items.forEach(item => {
     const element = createElement('div', {
       innerText: item,
       className: 'pokemon'
     });
     element.addEventListener('click', () => {
-      const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
-      favorites.push(item);
-      const favoritesJSON = JSON.stringify(favorites);
-      localStorage.setItem('favorites', favoritesJSON);
+      props.onSearchResultClick(item);
     });
-    container.appendChild(element);
+    appendContent(container, element);
   });
   return container;
 }
