@@ -17,7 +17,7 @@ function refreshLocalStorage(item) {
     favorites.splice(itemIndex, 1);
   }
 
-  if (favorites.length > 3) {
+  if (favorites.length > 4) {
     // favorites.splice(0, 1);
     favorites = favorites.slice(1);
   }
@@ -59,7 +59,23 @@ export function app() {
   }
   let pokemons = null;
   async function setSearchResults() {
+    const loadPokemons = createElement('div', {
+      className: 'circle'
+    });
+    const load = createElement('div', {
+      className: 'circle_div'
+    });
+    appendContent(main, loadPokemons);
+    appendContent(loadPokemons, load);
+    // let pokemons = null;
+    // async function setSearchResults() {
+    //   const loadPokemons = createElement('div', {
+    //     innerText: 'Pokemon are on the way...',
+    //     className: 'load'
+    //   });
+    appendContent(main, loadPokemons);
     const filteredPokemons = await filterPokemons(searchElement.value);
+    main.removeChild(loadPokemons);
     pokemons = createSearchResults({
       items: filteredPokemons,
       onSearchResultClick: handleSearchResultClick

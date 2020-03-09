@@ -1,4 +1,19 @@
+// function loadPokemons(time) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(async () => {
+//       const allPokemons = await getPokemons();
+//       resolve(allPokemons);
+//     }, time);
+//   });
+// }
+function waitFor(time) {
+  return new Promise(resolve => {
+    setTimeout(resolve, time);
+  });
+}
+
 async function getPokemons() {
+  await waitFor(8000);
   const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
   const results = await response.json();
   const pokemons = results.results;

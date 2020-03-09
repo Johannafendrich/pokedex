@@ -4,6 +4,9 @@ export function createSearchResults(props) {
   const container = createElement('div', {
     className: 'pokemonList'
   });
+  //   if (props.items.lenght === 0) {
+  // const notFound = createElement('div',
+
   props.items.forEach(item => {
     const element = createElement('div', {
       innerText: item,
@@ -14,5 +17,6 @@ export function createSearchResults(props) {
     });
     appendContent(container, element);
   });
+  // }
   return container;
 }
