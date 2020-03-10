@@ -42,6 +42,7 @@ export function app() {
     className: 'logo',
     src: Logo
   });
+  appendContent(main, [searchElement]);
 
   const favoritesContainer = createElement('div');
   let favorites = createFavList({
@@ -67,12 +68,6 @@ export function app() {
     });
     appendContent(main, loadPokemons);
     appendContent(loadPokemons, load);
-    // let pokemons = null;
-    // async function setSearchResults() {
-    //   const loadPokemons = createElement('div', {
-    //     innerText: 'Pokemon are on the way...',
-    //     className: 'load'
-    //   });
     appendContent(main, loadPokemons);
     const filteredPokemons = await filterPokemons(searchElement.value);
     main.removeChild(loadPokemons);
@@ -86,7 +81,6 @@ export function app() {
   setSearchResults();
 
   appendContent(header, [titleElement, logo]);
-  appendContent(main, [searchElement]);
 
   searchElement.addEventListener('input', event => {
     main.removeChild(pokemons);
