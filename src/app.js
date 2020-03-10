@@ -17,7 +17,7 @@ function refreshLocalStorage(item) {
     favorites.splice(itemIndex, 1);
   }
 
-  if (favorites.length > 3) {
+  if (favorites.length > 4) {
     // favorites.splice(0, 1);
     favorites = favorites.slice(1);
   }
@@ -42,6 +42,7 @@ export function app() {
     className: 'logo',
     src: Logo
   });
+  appendContent(main, [searchElement]);
 
   const favoritesContainer = createElement('div');
   let favorites = createFavList({
@@ -59,18 +60,36 @@ export function app() {
   }
   let pokemons = null;
   async function setSearchResults() {
-    const filteredPokemons = await filterPokemons(searchElement.value);
-    pokemons = createSearchResults({
-      items: filteredPokemons,
-      onSearchResultClick: handleSearchResultClick
+    const loadPokemons = createElement('div', {
+      className: 'circle'
     });
-    appendContent(main, pokemons);
+    const load = createElement('div', {
+      className: 'circle_div'
+    });
+    appendContent(main, loadPokemons);
+    appendContent(loadPokemons, load);
+    appendContent(main, loadPokemons);
+
+    try {
+      const filteredPokemons = await filterPokemons(searchElement.value);
+      pokemons = createSearchResults({
+        items: filteredPokemons,
+        onSearchResultClick: handleSearchResultClick
+      });
+      appendContent(main, pokemons);
+    } catch (error) {
+      const errorMessage = createElement('div', {
+        innerText: 'Error: ' + error.message
+      });
+      appendContent(main, errorMessage);
+    } finally {
+      main.removeChild(loadPokemons);
+    }
   }
 
   setSearchResults();
 
   appendContent(header, [titleElement, logo]);
-  appendContent(main, [searchElement]);
 
   searchElement.addEventListener('input', event => {
     main.removeChild(pokemons);
