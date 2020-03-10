@@ -5,7 +5,7 @@ export function createSearchResults(props) {
     className: 'pokemonList'
   });
 
-  if (props.items.lenght === 0) {
+  if (props.items.length === 0) {
     const notFound = createElement('div', {
       innerText: 'No Pokemon found',
       className: 'error'
