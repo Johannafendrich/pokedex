@@ -14,6 +14,7 @@ function waitFor(time) {
 
 async function getPokemons() {
   await waitFor(4000);
+  // throw new Error('No Pokemon found – try another!');
   const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1000');
   const results = await response.json();
   const pokemons = results.results;

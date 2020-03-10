@@ -69,13 +69,22 @@ export function app() {
     appendContent(main, loadPokemons);
     appendContent(loadPokemons, load);
     appendContent(main, loadPokemons);
-    const filteredPokemons = await filterPokemons(searchElement.value);
-    main.removeChild(loadPokemons);
-    pokemons = createSearchResults({
-      items: filteredPokemons,
-      onSearchResultClick: handleSearchResultClick
-    });
-    appendContent(main, pokemons);
+
+    try {
+      const filteredPokemons = await filterPokemons(searchElement.value);
+      pokemons = createSearchResults({
+        items: filteredPokemons,
+        onSearchResultClick: handleSearchResultClick
+      });
+      appendContent(main, pokemons);
+    } catch (error) {
+      const errorMessage = createElement('div', {
+        innerText: 'Error: ' + error.message
+      });
+      appendContent(main, errorMessage);
+    } finally {
+      main.removeChild(loadPokemons);
+    }
   }
 
   setSearchResults();
